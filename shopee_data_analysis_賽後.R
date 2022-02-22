@@ -1,4 +1,3 @@
-#### 重新在寫一次
 library(tidyverse)
 #view(head(result))
 customer <- read.csv("/users/andychang/desktop/contacts.csv")
@@ -9,7 +8,7 @@ customer$OrderId[customer$OrderId == ""] <- NA
 customer <- customer %>% fill(c("Email","OrderId"))
 customer[1,ncol(customer)] <- customer[2,ncol(customer)]
 customer$ticket_id <- customer$Id
-#### 先把contacts計算出來
+#### calculate concats
 customer_contact <- customer %>% group_by(Email) %>% summarise(ticket_trace = sum(Contacts))
 customer_combine <- merge(customer[,-c(1,4)], customer_contact, by.x = c("Email"), by.y = c("Email"))
 ### testing
